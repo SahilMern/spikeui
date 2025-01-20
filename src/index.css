@@ -1,5 +1,20 @@
+/* Universal reset */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
 }
+
+/* Body background and font styling */
+body {
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient color */
+  font-family: Arial, sans-serif;
+  height: 100vh; /* Ensures the body takes the full viewport height */
+  display: flex; /* Using flex to center content vertically */
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Horizontally center the content */
+  color: #333; /* Ensures text is readable on the gradient background */
+}
+
+
+

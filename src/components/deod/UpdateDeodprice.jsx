@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import "./home.css"; // Importing CSS file
-import { Link } from "react-router-dom";
-function Home() {
+import { useNavigate } from "react-router-dom"; // useNavigate instead of useHistory
+import "./updatedeod.css"; // Add CSS for styling
+
+const UpdateDeodprice = () => {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [prices, setPrices] = useState(null);
 
-  // Fetch latest prices when the component is mounted
+  const navigate = useNavigate(); // useNavigate for redirecting
+
+  // Fetch the current prices when the component is mounted
   const fetchPrices = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/bot/getPrices");
@@ -16,8 +19,10 @@ function Home() {
         const data = await response.json();
         if (data.data && data.data.sethighdeod && data.data.setlowdeodprice) {
           setPrices(data.data);
+          setInput1(data.data.sethighdeod);
+          setInput2(data.data.setlowdeodprice);
         } else {
-          setPrices(null); // No prices found
+          setPrices(null);
         }
       } else {
         setError("Failed to fetch prices.");
@@ -31,7 +36,7 @@ function Home() {
     fetchPrices();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleUpdatePrice = async (e) => {
     e.preventDefault();
 
     if (!input1 || !input2) {
@@ -39,62 +44,40 @@ function Home() {
       return;
     }
 
-    setLoading(true);
-    setError(""); // Clear previous errors
-
-    const data = {
+    const updatedPrice = {
       sethighdeod: input1,
       setlowdeodprice: input2,
     };
 
     try {
+      setLoading(true);
       const response = await fetch("http://localhost:3000/api/bot/setPrice", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(updatedPrice),
       });
 
       if (response.ok) {
-        alert("Price data added successfully");
-        setInput1("");
-        setInput2("");
-        fetchPrices(); // Fetch updated prices
+        alert("Price updated successfully!");
+        navigate("/"); // Redirect to homepage after successful update
       } else {
-        const errorData = await response.json();
-        setError(errorData.error || "Error occurred while adding price.");
+        setError("Failed to update prices.");
       }
     } catch (error) {
-      setError("Something went wrong, please try again later.");
+      setError("Error updating prices.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="app-container">
+    <div className="update-deodprice-container">
       {prices ? (
-        <div className="price-container">
-          <h3>Latest Prices</h3>
-          <div className="price-display">
-            <p>
-              <strong>High Price:</strong> {prices.sethighdeod}
-            </p>
-            <p>
-              <strong>Low Price:</strong> {prices.setlowdeodprice}
-            </p>
-          </div>
-          <Link to="/updateDeodprice">
-            <button type="button" className="update-button">
-              Update Price
-            </button>
-          </Link>
-        </div>
-      ) : (
-        <div className="form-container">
-          <h2>Set Price</h2>
-          <form onSubmit={handleSubmit}>
+        <div className="update-form">
+          <h2>Update Prices</h2>
+          <form onSubmit={handleUpdatePrice}>
             <div className="input-group">
               <label>Deod High Price</label>
               <input
@@ -112,14 +95,16 @@ function Home() {
               />
             </div>
             <button type="submit" disabled={loading}>
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? "Updating..." : "Update Price"}
             </button>
             {error && <div className="error-message">{error}</div>}
           </form>
         </div>
+      ) : (
+        <div>Loading...</div>
       )}
     </div>
   );
-}
+};
 
-export default Home;
+export default UpdateDeodprice;

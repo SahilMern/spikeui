@@ -2,6 +2,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Navbar from "./components/Navbar/Navbar";
+import UpdateDeodprice from "./components/deod/UpdateDeodprice";
+import Error from "./components/Error/Error";
+import BotPage from "./components/bot/BotPage";
 
 const App = () => {
   return (
@@ -9,6 +12,11 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/bot" element={<BotPage />} />
+
+        <Route path="/updateDeodprice" element={<UpdateDeodprice />} />updateDeodprice
+        <Route path="*" element={<Error />} />
+
       </Routes>
     </div>
   );
