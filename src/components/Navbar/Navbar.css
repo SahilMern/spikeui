@@ -1,0 +1,70 @@
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #dcdbdb4d;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+  
+  .logo {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover Animation for Logo */
+  .logo:hover {
+    transform: scale(1.1);
+    color: #feb47b;
+  }
+  
+  /* Navbar Links */
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .nav-links li {
+    margin: 0 20px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover Animation for Links */
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #feb47b;
+    bottom: 0;
+    left: 50%;
+    transition: width 0.3s ease, left 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .nav-links a:hover {
+    color: #feb47b;
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+  }
+  
