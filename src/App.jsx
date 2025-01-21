@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Navbar from "./components/Navbar/Navbar";
@@ -14,7 +13,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/bot" element={<BotPage />} />
 
-        <Route path="/updateDeodprice" element={<UpdateDeodprice />} />updateDeodprice
+        <Route path="/updateDeodprice" element={<UpdateDeodprice />} />
         <Route path="*" element={<Error />} />
 
       </Routes>

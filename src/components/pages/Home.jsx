@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./home.css"; // Importing CSS file
 import { Link } from "react-router-dom";
 function Home() {
@@ -23,6 +23,8 @@ function Home() {
         setError("Failed to fetch prices.");
       }
     } catch (error) {
+      console.log(error);
+      
       setError("Error fetching prices.");
     }
   };
@@ -66,6 +68,8 @@ function Home() {
         setError(errorData.error || "Error occurred while adding price.");
       }
     } catch (error) {
+      console.log(error);
+      
       setError("Something went wrong, please try again later.");
     } finally {
       setLoading(false);
