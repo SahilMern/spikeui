@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./home.css"; // Importing CSS file
 import { Link } from "react-router-dom";
+import { getPrice, setprice } from "../../helper/BackendUrl";
 function Home() {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
@@ -11,7 +12,7 @@ function Home() {
   // Fetch latest prices when the component is mounted
   const fetchPrices = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/bot/getPrices");
+      const response = await fetch(`${getPrice}`);
       if (response.ok) {
         const data = await response.json();
         if (data.data && data.data.sethighdeod && data.data.setlowdeodprice) {
@@ -50,7 +51,7 @@ function Home() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/bot/setPrice", {
+      const response = await fetch(`${setprice}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
