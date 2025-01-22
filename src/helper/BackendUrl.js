@@ -1,4 +1,4 @@
-const backendUrl = `http://54.160.223.57:3000`; // Base backend URL
+const backendUrl = `https://spike.decentrawood.com`; // Base backend URL
 
 // API Endpoints
 const startBot = `${backendUrl}/api/bot/startbot`;

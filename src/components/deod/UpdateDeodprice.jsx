@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // useNavigate instead of useHistory
 import "./updatedeod.css"; // Add CSS for styling
+import { getPrice, setprice } from "../../helper/BackendUrl";
 
 const UpdateDeodprice = () => {
   const [input1, setInput1] = useState("");
@@ -14,7 +15,7 @@ const UpdateDeodprice = () => {
   // Fetch the current prices when the component is mounted
   const fetchPrices = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/bot/getPrices");
+      const response = await fetch(`${getPrice}`);
       if (response.ok) {
         const data = await response.json();
         if (data.data && data.data.sethighdeod && data.data.setlowdeodprice) {
@@ -28,6 +29,8 @@ const UpdateDeodprice = () => {
         setError("Failed to fetch prices.");
       }
     } catch (error) {
+      console.log(error, "error");
+      
       setError("Error fetching prices.");
     }
   };
@@ -51,7 +54,7 @@ const UpdateDeodprice = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/api/bot/setPrice", {
+      const response = await fetch(`${setprice}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,6 +69,8 @@ const UpdateDeodprice = () => {
         setError("Failed to update prices.");
       }
     } catch (error) {
+      console.log(error);
+      
       setError("Error updating prices.");
     } finally {
       setLoading(false);

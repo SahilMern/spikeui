@@ -7,7 +7,7 @@
 
 /* Body background and font styling */
 body {
-  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient color */
+  background: linear-gradient(to left, #385dd9, #3464ff); /* Gradient color */
   font-family: Arial, sans-serif;
   height: 100vh; /* Ensures the body takes the full viewport height */
   display: flex; /* Using flex to center content vertically */
