@@ -9,7 +9,7 @@ function Navbar() {
       </div>
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li> {/* Home page link */}
-        <li><Link to="/bot">Bot</Link></li> {/* About page link */}
+        <li><Link to="/botpage">Bot</Link></li> {/* About page link */}
         <li><Link to="/contact">Contact</Link></li> {/* Contact page link */}
       </ul>
     </nav>
