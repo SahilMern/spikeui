@@ -65,7 +65,7 @@ const BotPage = () => {
         </div>
         <div className="card-content">
           <h2>Bot Control</h2>
-          <p>Manage your bots operations efficiently.</p>
+          <p>Manages your bots operations efficiently.</p>
           <div className="button-container">
             <button
               className={`start-btn ${isBotRunning ? "disabled" : ""}`}
